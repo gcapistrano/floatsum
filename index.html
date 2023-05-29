@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+  <div>
+    <input type="file" id="input" accept=".txt">
+    <button id="button">Enviar</button>
+    <p id="result"></p>
+  </div>
+  <script>
+    // Seleciona os elementos do HTML
+    var input = document.getElementById("input");
+    var button = document.getElementById("button");
+    var result = document.getElementById("result");
+  
+    // Adiciona um evento de clique ao botão
+    button.addEventListener("click", function() {
+      // Verifica se um arquivo foi selecionado
+      if (input.files.length > 0) {
+        // Cria um objeto FileReader
+        var reader = new FileReader();
+        // Define uma função que será executada quando o FileReader terminar de ler o arquivo
+        reader.onload = function(e) {
+          // Obtém o conteúdo do arquivo como uma string
+          var fileContent = e.target.result;
+          // Divide o conteúdo do arquivo em linhas
+          var lines = fileContent.split("\n");
+          // Cria uma variável para armazenar a soma dos valores
+          var sum = 0;
+          // Cria uma expressão regular para o formato x,xx
+          var regex = /^\d.\d{2}$/;
+          // Percorre cada linha do arquivo
+          for (var i = 0; i < lines.length; i++) {
+            // Divide a linha em palavras separadas por espaço
+            var words = lines[i].split(" ");
+            // Percorre cada palavra da linha
+            for (var j = 0; j < words.length; j++) {
+              // Substitui a vírgula pelo ponto na palavra
+              var word = words[j].replace(",", ".");
+              // Verifica se a palavra corresponde à expressão regular              
+              if (regex.test(word)) {
+                // Tenta converter a palavra em um número decimal
+                var number = parseFloat(word);
+                // Adiciona o número à soma
+                sum += number;
+              }
+            }
+          }
+          // Exibe o resultado da soma no elemento <p> do HTML
+          result.innerHTML = "A soma dos valores com o formato x,xx é: " + sum;
+        };
+        // Lê o arquivo selecionado como uma string
+        reader.readAsText(input.files[0]);
+      } else {
+        // Exibe uma mensagem de erro se nenhum arquivo foi selecionado
+        result.innerHTML = "Por favor, selecione um arquivo txt.";
+      }
+    });
+  </script>
+  
+
+</body>
+</html>

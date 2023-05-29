@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: auto;
+    margin-top: 80px;
+    padding: 40px;
+    background-color: lightgray;
+    border: solid 2px black;
+    border-radius: 8px;
+  }
+
+  input {
+    margin: 10px auto;
+  }
+
+  button {
+    margin: 10px auto;
+    padding: 3px;
+    border-radius: 5px;
+  }
+
+  p {
+    margin: 10px auto;
+  }
